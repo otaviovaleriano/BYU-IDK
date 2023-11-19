@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Gothic+A1:wght@500;700&family=Manrope:wght@200&display=swap");
+
+body {
+  font-family: "Gothic A1", sans-serif;
+}
+.inputBox {
+  border-radius: 50px;
+  border: 0px;
+  padding-left: 20px;
+  color: rgb(53, 53, 53);
+  font-size: 20px;
+}
+
+.email,
+.password {
+  display: block;
+  margin: 15px auto;
+  width: 60%;
+}
+
+.inputBox::placeholder {
+  font-size: small;
+}
+
+.login-container {
+  background-color: #d9d9d9;
+  align-items: center;
+  border-radius: 10px;
+
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 50%;
+  margin: auto;
+  display: grid;
+}
+
+.btn {
+  border-radius: 20px;
+  border: 0px;
+  transition: transform 0.5s;
+}
+.btn:hover {
+  transform: scale(1.2);
+}
+
+.loginTitle {
+  background-color: #006eb6;
+  color: white;
+  height: 30px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding-top: 10px;
+  margin: 0px;
+  padding: 10px;
+}
+
+.loginbtn {
+  background-color: #006eb6;
+  color: white;
+  padding: 10px 15px 10px 15px;
+  font-size: 15px;
+  width: 30%;
+  margin-bottom: 15px;
+}
+
+.loginbtn:hover {
+  background-color: #0099ff;
+}
+
+hr {
+  width: 80%;
+  margin: auto;
+  margin-bottom: 15px;
+}

@@ -30,7 +30,6 @@ body {
   text-align: center;
   width: 30%;
   margin: auto;
-  display: grid;
 }
 
 .btn {
@@ -79,6 +78,7 @@ header {
   display: grid;
   border-radius: 20px;
   /* padding: 5px; */
+  margin-bottom: 30px;
 }
 
 #title {

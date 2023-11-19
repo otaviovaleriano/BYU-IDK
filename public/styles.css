@@ -1,0 +1,196 @@
+body{
+    margin: 0;
+    font-family: 'Gothic A1', sans-serif;
+}
+
+#formBox {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    grid-template-rows: 120px 1fr;
+    width: 100%;
+    justify-content: space-evenly;
+    justify-items: center;
+    padding: 30px;
+}
+
+#searchBox {
+    grid-column: 1/3;
+    grid-row: 1/2;
+    width: 60%;
+    background-color: #ADADAD;
+    border-radius: 20px;
+    display: grid;
+    grid-template-columns: 75% 25%;
+    padding: 20px;
+    margin-bottom: 40px;
+}
+
+.SearchBtn {
+    margin-left: 20px;
+    background-color: #006EB6;
+    font-size: 20px;
+    color: white;
+}
+
+.SearchBtn:hover {
+    background-color: #0099ff;
+}
+
+#categoriesMenu {
+    width: 100%;
+    grid-column: 1/2;
+    grid-row: 2/3;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: space-evenly;
+    justify-items: center;
+    grid-row-gap: 20px;
+}
+
+.categoriesBtn {
+    width: 100%;
+    height: 40px;
+    background-color: #D9D9D9;
+    font-size: 20px;
+    color: black;
+}
+
+.categoriesBtn:hover {
+    background-color: #ADADAD;
+}
+
+.selectedCategory {
+    background-color: #006EB6;
+    color: white;
+}
+
+.selectedCategory:hover {
+    background-color: #0099ff;
+}
+
+
+#formContent {
+    grid-column: 2/3;
+    grid-row: 2/3;
+    width: 80%;
+}
+
+.inputBox {
+    border-radius: 50px;
+    border: 0px;
+    padding-left: 20px;
+    color: rgb(53, 53, 53);
+    font-size: 20px;
+}
+
+.btn {
+    border-radius: 15px;
+    border: 0px;
+    transition: transform .5s;
+}
+
+.btn:hover {
+    transform: scale(1.15);
+}
+
+.questionBox {
+    width: 100%;
+    background-color: #D9D9D9;
+    border-radius: 20px;
+    display: grid;
+    grid-template-rows: 50px 1fr 1fr 70px;
+    margin-bottom: 25px;
+}
+
+.postHeader {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 70% 15% 15%;
+    padding-top: 8px;
+}
+
+.replyHeader {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 85% 15%;
+    padding-top: 8px;
+    grid-row: 1/2;
+}
+
+.PostUserName {
+    grid-column: 1/2;
+    font-size: 20px;
+    padding-top: 12px;
+    padding-left: 20px;
+    font-weight: bold;
+}
+
+.IconBox {
+    display: grid;
+    grid-template-columns: 35px 1fr;
+    justify-content: space-evenly;
+    justify-items: center;
+}
+
+.iconImg {
+    width: 100%;
+}
+
+.iconNum {
+    padding: 10px;
+    width: 100%;
+    text-align: left;
+    padding-left: 25px;
+    font-weight: bold;
+}
+
+.PostContent {
+    padding: 10px;
+    padding-left: 20px;
+    font-size: 20px;
+    grid-row: 2/3;
+}
+
+.CommentBox {
+    display: grid;
+    grid-template-columns: 75% 25%;
+    background-color: #ADADAD;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    grid-row: 4/5;
+}
+
+.commentBox {
+    margin: 15px;
+}
+
+.postBtn {
+    background-color: #006EB6;
+    font-size: 20px;
+    color: white;
+    margin: 15px;
+}
+
+.postBtn:hover {
+    background-color: #0099ff;
+}
+
+.replies {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-row: 3/4;
+}
+
+.reply {
+    background-color: white;
+    width: 95%;
+    margin: auto;
+    border-radius: 20px;
+    display: grid;
+}
+
+.replyContent {
+    padding: 10px;
+    padding: 20px;
+    font-size: 20px;
+}

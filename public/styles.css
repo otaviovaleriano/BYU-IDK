@@ -42,6 +42,7 @@ body{
     grid-row: 2/3;
     display: grid;
     grid-template-columns: 1fr;
+    grid-template-rows: repeat(auto-fill, minmax(30px, 1fr));
     justify-content: space-evenly;
     justify-items: center;
     grid-row-gap: 20px;
@@ -98,15 +99,20 @@ body{
     background-color: #D9D9D9;
     border-radius: 20px;
     display: grid;
-    grid-template-rows: 50px 1fr 1fr 70px;
+    grid-template-rows: auto auto 1fr auto;
     margin-bottom: 25px;
 }
 
 .postHeader {
     width: 100%;
     display: grid;
-    grid-template-columns: 70% 15% 15%;
+    grid-template-columns: 180px auto 200px;
     padding-top: 8px;
+    height: 55px;
+    background-color: #4F9ACF;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    color: white;
 }
 
 .replyHeader {
@@ -118,11 +124,21 @@ body{
 }
 
 .PostUserName {
-    grid-column: 1/2;
     font-size: 20px;
     padding-top: 12px;
     padding-left: 20px;
     font-weight: bold;
+}
+
+.PostDate {
+    padding-top: 15px;
+    font-size: 16px;
+    text-align: left;
+}
+
+.Icons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
 .IconBox {
@@ -133,20 +149,35 @@ body{
 }
 
 .iconImg {
-    width: 100%;
+    width: 35px;
+    margin: auto;
+    margin-bottom: 15px;
 }
 
 .iconNum {
-    padding: 10px;
+    padding-top: 12px;
+    width: 35px;
+    text-align: left;
+    padding-left: 0px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.CommenticonNum {
+    padding-top: 6px;
     width: 100%;
     text-align: left;
     padding-left: 25px;
     font-weight: bold;
+    font-size: 20px;
+    color: rgb(58, 58, 58);
 }
 
 .PostContent {
     padding: 10px;
-    padding-left: 20px;
+    padding-left: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
     font-size: 20px;
     grid-row: 2/3;
 }
@@ -157,6 +188,7 @@ body{
     background-color: #ADADAD;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
+    height: 75px;
     grid-row: 4/5;
 }
 
@@ -187,10 +219,17 @@ body{
     margin: auto;
     border-radius: 20px;
     display: grid;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .replyContent {
     padding: 10px;
     padding: 20px;
     font-size: 20px;
+    line-height: 40px;
+}
+
+.shadow {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }

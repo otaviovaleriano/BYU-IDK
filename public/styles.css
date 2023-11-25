@@ -101,7 +101,7 @@ header {
 #icon img {
   max-width: 80px;
   max-height: 80px;
-  /* margin-top: -10px; */
+  margin-top: -10px;
   transition: transform 0.3s ease-in-out;
 }
 

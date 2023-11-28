@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../styles.css">
+    <script src="firebase.mjs" type="module"></script>
+    <script src="main.mjs" type="module"></script>
 </head>
 <body>
     <div id="formBox">
@@ -25,78 +27,8 @@
             <button class="shadow btn categoriesBtn">Clubs</button>
         </div>
 
-        <div id="formContent">
-            <div class="questionBox shadow">
-                <div class="postHeader">
-                    <text class="PostUserName">EmilyGrape</text>
-                    <text class="PostDate">October 11, 2023</text>
-                    <div class="Icons">
-                        <div class="IconBox">
-                            <img src="../images/Comment-white.png" class="iconImg">
-                            <text class="iconNum">0</text>
-                        </div>
-                        <div class="IconBox">
-                            <img src="../images/ThumbsUp-White.png" class="iconImg">
-                            <text class="iconNum">12</text>
-                        </div>
-                    </div>
-                </div>
-                <text class="PostContent">What Apartment Complexes Are the Best to Live in?</text>
-                <div class="replies"></div>
-                <div class="CommentBox">
-                    <input class="inputBox commentBox"type="text" placeholder="Comment">
-                    <button class="btn postBtn ">Post</button>
-                </div>
-            </div>
-            <div class="questionBox shadow">
-                <div class="postHeader">
-                    <text class="PostUserName">JakeBlake</text>
-                    <text class="PostDate">October 15, 2023</text>
-                        <div class="Icons">
-                        <div class="IconBox">
-                            <img src="../images/Comment-white.png" class="iconImg">
-                            <text class="iconNum">200</text>
-                        </div>
-                        <div class="IconBox">
-                            <img src="../images/ThumbsUp-white.png" class="iconImg">
-                            <text class="iconNum">12</text>
-                        </div>
-                    </div>
-                </div>
-                <text class="PostContent">What should I Study?</text>
-                <div class="replies">
-                    <div class="reply shadow">
-                        <div class="replyHeader">
-                            <text class="PostUserName">EmilyGrape</text>
-                            <div class="IconBox">
-                                <img src="../images/ThumbsUp.png" class="iconImg">
-                                <text class="CommenticonNum">12</text>
-                            </div>
-                        </div>
-                        <text class="replyContent">Study Graphic Design, I am loving it!!</text>
-                    </div>
-                    <div class="reply shadow">
-                        <div class="replyHeader">
-                            <text class="PostUserName">OnceWasAShip</text>
-                            <div class="IconBox">
-                                <img src="../images/ThumbsUp.png" class="iconImg">
-                                <text class="CommenticonNum">12</text>
-                            </div>
-                        </div>
-                        <text class="replyContent">
-                            There once was a ship that put to sea
-                            The name of the ship was the Billy O' Tea
-                            The winds blew up, her bow dipped down
-                            Oh blow, my bully boys, blow (huh)
-                        </text>
-                    </div>
-                </div>
-                <div class="CommentBox">
-                    <input class="inputBox commentBox"type="text" placeholder="Comment">
-                    <button class="btn postBtn ">Post</button>
-                </div>
-            </div>
-        </div>
+        <div id="formContent"></div>
+    
     </div>
 
 </body>

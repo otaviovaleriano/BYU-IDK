@@ -50,8 +50,37 @@ export async function SetPostInfo(){
 
 }
 
-export async function CreateUser(){
+async function SetNewUser(userId, newUserName) {
+    await setDoc(doc(db, "Users", userId), {
+        UserName: newUserName
+    });
+}
 
+export async function CreateUser(email, password, newUserName){
+    let errorMessage = ""
+        if (password.length > 0 && email.length > 0 && newUserName.length > 0)
+        {
+            if (newUserName.length > 12)
+            {
+                errorMessage = "UserName must be less than 13 characters";
+            }
+            else
+            {
+                const auth = getAuth();
+                createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+
+                const user = userCredential.user;
+                SetNewUser(user.userID, newUserName);
+                errorMessage = "success"
+                })
+                .catch((error) => {
+                    errorMessage = error.message;
+                });
+            }
+        }
+        else {errorMessage("Please fill Out all Fields")}
+    return(errorMessage)
 }
 
 export async function LoginUser(password, email){
@@ -62,7 +91,7 @@ export async function LoginUser(password, email){
         .then((userCredential) => {
             // Signed in 
             const user = userCredential.user;
-            errorMessage = "successful"
+            errorMessage = "success"
             // ...
         })
         .catch((error) => {

@@ -65,7 +65,7 @@ function CommentContent(Comments){
 
 function INIT(){
     let expandButton = document.getElementById("PostArrow")
-    let postMenu = false;
+    let postMenu = true;
 
     expandButton.addEventListener("click", () => {
         if (postMenu == false)

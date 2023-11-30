@@ -1,48 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BYU-I Don't Know</title>
-    <link rel="stylesheet" href="../styles.css">
-    <script src="../modules/firebase.mjs" type="module"></script>
-    <script src="../modules/main.mjs" type="module"></script>
-</head>
-<body>
-    <header>
-    <div id="title"><h1>BYU-I Don't Know</h1>
-    </div>
-    <div id="icon">
-        <a href="../Login/index.html">
-        <img src="../images/icon-white.svg" alt="Login Icon - Access Acount"></a>
-    </div>
-    </header>
-    <main>
-        <div id="formBox">
-
-            <div class="shadow" id="PostContent">
-                <img src="../images/DownArrow.png" id="PostArrow">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BYU-I Don't Know</title>
+        <link rel="stylesheet" href="../styles.css">
+        <script src="../modules/firebase.mjs" type="module"></script>
+        <script src="../modules/main.mjs" type="module"></script>
+    </head>
+    <body>
+        <header>
+            <div id="title"><h1>BYU-I Don't Know</h1>
             </div>
-    
-            <div class="shadow" id="searchBox">
-                <select name="cars" id="CategoryInput">
-                    <option value="Housing">Housing</option>
-                    <option value="Classes">Classes</option>
-                    <option value="Professors">Professors</option>
-                    <option value="Events">Events</option>
-                    <option value="Other">Other</option>
-                </select>
-                <input class="inputBox searchInput"type="text" placeholder="Search">
-                <button class="btn SearchBtn">Search</button>
+            <div id="icon">
+                <a href="../Login/index.html">
+                    <img src="../images/icon-white.svg"
+                        alt="Login Icon - Access Acount"></a>
             </div>
-    
-            <div id="formContent"></div>
-        </div>
-    </main>
+        </header>
+        <main>
+            <div id="formBox">
 
-    <footer>
-        <span>Final Project BYU-I Don't Know Website.</span>
-        <span>@BYU-I 2023</span>
-    </footer>
-</body>
+                <div class="shadow" id="searchBox">
+                    <select name="cars" id="SearchCategoryInput">
+                        <option value="All">All</option>
+                        <option value="Housing">Housing</option>
+                        <option value="Classes">Classes</option>
+                        <option value="Professors">Professors</option>
+                        <option value="Events">Events</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <input class="inputBox searchInput" type="text"
+                        placeholder="Search">
+                    <button class="btn SearchBtn">Search</button>
+                </div>
+
+                <!-- <h2 class="askQuestion">Ask Something - Click on The Arrow!</h2> -->
+                <div class="shadow" id="PostContent">
+                    <textarea placeholder="Ask A Question!"
+                        id="PostContentInput"></textarea>
+                    <!-- Category Drop Down -->
+                    <select name="cars" id="CategoryInput">
+                        <option value="Housing">Housing</option>
+                        <option value="Classes">Classes</option>
+                        <option value="Professors">Professors</option>
+                        <option value="Events">Events</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <button class="btn SearchBtn" id="SubmitButton">Submit</button>
+                    <img src="../images/UpArrow.png" id="PostArrow">
+                </div>
+
+                <div id="formContent"></div>
+            </div>
+        </main>
+
+        <footer>
+            <span>Final Project BYU-I Don't Know Website.</span>
+            <span>@BYU-I 2023</span>
+        </footer>
+    </body>
 </html>

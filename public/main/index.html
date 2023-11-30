@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BYU-I Don't Know</title>
     <link rel="stylesheet" href="../styles.css">
+    <script src="../modules/firebase.mjs" type="module"></script>
+    <script src="../modules/main.mjs" type="module"></script>
 </head>
 <body>
     <header>
@@ -16,7 +18,27 @@
     </div>
     </header>
     <main>
-           </main>
+        <div id="formBox">
+
+            <div class="shadow" id="PostContent">
+                <img src="../images/DownArrow.png" id="PostArrow">
+            </div>
+    
+            <div class="shadow" id="searchBox">
+                <select name="cars" id="CategoryInput">
+                    <option value="Housing">Housing</option>
+                    <option value="Classes">Classes</option>
+                    <option value="Professors">Professors</option>
+                    <option value="Events">Events</option>
+                    <option value="Other">Other</option>
+                </select>
+                <input class="inputBox searchInput"type="text" placeholder="Search">
+                <button class="btn SearchBtn">Search</button>
+            </div>
+    
+            <div id="formContent"></div>
+        </div>
+    </main>
 
     <footer>
         <span>Final Project BYU-I Don't Know Website.</span>

@@ -1,7 +1,7 @@
-import { GetPostInfo } from "./firebase.mjs";
+import { GetPostInfo } from "../modules/firebase.mjs";
 
 let PostData;
-let testmode = false;
+let testmode = true;
 
 if (testmode === true)
 {

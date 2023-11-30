@@ -4,6 +4,9 @@ import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.5.2/firebas
 // If you enabled Analytics in your project, add the Firebase SDK for Google Analytics
 import { getAnalytics } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-analytics.js'
 
+// If you enabled Analytics in your project, add the Firebase SDK for Google Analytics
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js'
+
 // Add Firebase products that you want to use
 //import { getAuth } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js'
 import { getFirestore, collection, query, limit, orderBy, getDoc, getDocs, doc} from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js'
@@ -24,6 +27,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const db = getFirestore(app);
+const auth = getAuth();
 
 // Query
 export async function GetPostInfo(queryAmount) {
@@ -40,4 +44,31 @@ export async function GetPostInfo(queryAmount) {
         postData.push(doc.data());
     });
     return postData
+}
+
+export async function SetPostInfo(){
+
+}
+
+export async function CreateUser(){
+
+}
+
+export async function LoginUser(password, email){
+    let errorMessage = ""
+    if (password.length > 0 && email.length > 0)
+    {
+        signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            // Signed in 
+            const user = userCredential.user;
+            errorMessage = "successful"
+            // ...
+        })
+        .catch((error) => {
+            errorMessage = error.message;
+        });
+    }
+    else {errorMessage = "Please fill Out all Fields"}
+    return errorMessage;
 }

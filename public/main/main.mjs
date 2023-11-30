@@ -1,6 +1,12 @@
 import { GetPostInfo } from "./firebase.mjs";
 
-let PostData = await GetPostInfo(20)
+let PostData;
+let testmode = false;
+
+if (testmode === true)
+{
+    PostData = await GetPostInfo(20)
+}
 
 function setPostContent(){
     for (let i = 0; i < PostData.length; i++) {
@@ -26,7 +32,7 @@ function setPostContent(){
                 ${Comments}
                 </div>
                 <div class="CommentBox">
-                    <input class="inputBox commentBox"type="text" placeholder="Comment">
+                    <textarea class="inputBox commentBox"type="text" placeholder="Comment"></textarea>
                     <button class="btn postBtn ">Post</button>
                 </div>
             </div>
@@ -57,4 +63,44 @@ function CommentContent(Comments){
     return CommentsString;
 }
 
-setPostContent()
+function INIT(){
+    let expandButton = document.getElementById("PostArrow")
+    let postMenu = false;
+
+    expandButton.addEventListener("click", () => {
+        if (postMenu == false)
+        {
+            const content = `
+                <textarea placeholder="Ask A Question!" id="PostContentInput"></textarea>
+                <!-- Category Drop Down -->
+                <select name="cars" id="CategoryInput">
+                    <option value="Housing">Housing</option>
+                    <option value="Classes">Classes</option>
+                    <option value="Professors">Professors</option>
+                    <option value="Events">Events</option>
+                    <option value="Other">Other</option>
+                </select>
+                <button class="btn SearchBtn" id="SubmitButton">Submit</button>
+            `
+            document.getElementById("PostContent").insertAdjacentHTML("afterbegin", content)
+            expandButton.src = "../images/UpArrow.png"
+            postMenu = true;
+        }
+        else
+        {
+            document.getElementById("CategoryInput").remove();
+            document.getElementById("SubmitButton").remove();
+            document.getElementById("PostContentInput").remove();
+            expandButton.src = "../images/DownArrow.png"
+            postMenu = false;
+        }
+
+    });
+
+    if (testmode === true)
+    {
+        setPostContent()
+    }
+}
+
+INIT()

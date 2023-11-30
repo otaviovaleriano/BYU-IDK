@@ -10,25 +10,24 @@
 </head>
 <body>
     <div id="formBox">
+
+        <div class="shadow" id="PostContent">
+            <img src="../images/DownArrow.png" id="PostArrow">
+        </div>
+
         <div class="shadow" id="searchBox">
-            <input class="inputBox"type="text" placeholder="Search">
+            <select name="cars" id="CategoryInput">
+                <option value="Housing">Housing</option>
+                <option value="Classes">Classes</option>
+                <option value="Professors">Professors</option>
+                <option value="Events">Events</option>
+                <option value="Other">Other</option>
+            </select>
+            <input class="inputBox searchInput"type="text" placeholder="Search">
             <button class="btn SearchBtn">Search</button>
         </div>
 
-        <div id="categoriesMenu">
-            <button class="shadow btn categoriesBtn selectedCategory">All</button>
-            <button class="shadow btn categoriesBtn">Housing</button>
-            <button class="shadow btn categoriesBtn">Classes</button>
-            <button class="shadow btn categoriesBtn">Professors</button>
-            <button class="shadow btn categoriesBtn">Financial</button>
-            <button class="shadow btn categoriesBtn">Departments</button>
-            <button class="shadow btn categoriesBtn">Events</button>
-            <button class="shadow btn categoriesBtn">Intramural</button>
-            <button class="shadow btn categoriesBtn">Clubs</button>
-        </div>
-
         <div id="formContent"></div>
-    
     </div>
 
 </body>

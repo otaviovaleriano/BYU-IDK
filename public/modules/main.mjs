@@ -32,7 +32,7 @@ function setPostContent(){
                 ${Comments}
                 </div>
                 <div class="CommentBox">
-                    <textarea class="inputBox commentBox"type="text" placeholder="Comment"></textarea>
+                    <textarea class="inputBoxMain commentBox"type="text" placeholder="Comment"></textarea>
                     <button class="btn postBtn ">Post</button>
                 </div>
             </div>
@@ -65,7 +65,7 @@ function CommentContent(Comments){
 
 function INIT(){
     let expandButton = document.getElementById("PostArrow")
-    let postMenu = false;
+    let postMenu = true;
 
     expandButton.addEventListener("click", () => {
         if (postMenu == false)

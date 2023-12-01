@@ -16,7 +16,7 @@ body {
 }
 
 .email,
-.password {
+.password, .username {
   display: block;
   margin: 15px auto;
   width: 60%;
@@ -180,16 +180,16 @@ body {
 }
 
 .loginbtn {
-  background-color: #006eb6;
+  background-color: #b60003;
   color: white;
   padding: 10px 15px 10px 15px;
-  font-size: 15px;
+  font-size: 10px;
   width: 30%;
   margin-bottom: 15px;
 }
 
 .loginbtn:hover {
-  background-color: #0099ff;
+  background-color: #851d1f;
 }
 
 hr {
@@ -197,7 +197,6 @@ hr {
   margin: auto;
   margin-bottom: 15px;
 }
-
 /* Main */
 
 #formBox {

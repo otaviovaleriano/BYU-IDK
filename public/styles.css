@@ -210,6 +210,12 @@ hr {
     margin: auto;
 }
 
+.askQuestion{
+  color: #006eb6;
+  text-align: center;
+  padding: 10px;
+}
+
 #PostContentInput {
     grid-column: 1/4;
     margin: 20px;
@@ -232,6 +238,16 @@ hr {
     background-color: white;
     color: black;
     font-size: 20px;
+}
+
+#SearchCategoryInput{
+  grid-column: 1/2;
+  margin: 20px;
+  border-radius: 20px;
+  text-align: center;
+  background-color: white;
+  color: black;
+  font-size: 20px;
 }
 
 #PostArrow {

@@ -677,3 +677,45 @@ footer {
 .signupbtn:hover {
   background-color: #0099ff;
 }
+
+
+/* Account Page */
+
+/* ACCOUNT VIEW PAGE CSS */
+.account-container {
+background-color: #d9d9d9;
+align-items: center;
+border-radius: 10px;
+box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+text-align: center;
+width: 30%;
+margin: auto;
+}
+
+.accountTitle {
+background-color: #006eb6;
+color: white;
+height: 30px;
+border-top-left-radius: 10px;
+border-top-right-radius: 10px;
+padding-top: 10px;
+margin: 0px;
+padding: 10px;
+}
+
+.deleteaccount {
+background-color: #b60003;
+color: white;
+padding: 10px 15px 10px 15px;
+font-size: 10px;
+width: 30%;
+margin-bottom: 15px;
+}
+.savechanges {
+background-color: #006eb6;
+color: white;
+padding: 10px 15px 10px 15px;
+font-size: 10px;
+width: 30%;
+margin-bottom: 15px;
+}

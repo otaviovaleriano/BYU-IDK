@@ -179,19 +179,6 @@ body {
   padding: 10px;
 }
 
-.loginbtn {
-  background-color: #b60003;
-  color: white;
-  padding: 10px 15px 10px 15px;
-  font-size: 10px;
-  width: 30%;
-  margin-bottom: 15px;
-}
-
-.loginbtn:hover {
-  background-color: #851d1f;
-}
-
 hr {
   width: 80%;
   margin: auto;
@@ -692,6 +679,11 @@ width: 30%;
 margin: auto;
 }
 
+.account-container img{
+  width: 150px;
+  margin-top: 20px;
+}
+
 .accountTitle {
 background-color: #006eb6;
 color: white;
@@ -711,6 +703,12 @@ font-size: 10px;
 width: 30%;
 margin-bottom: 15px;
 }
+
+.deleteaccount:hover{
+  background-color: rgb(136, 8, 10);
+  cursor: pointer;
+}
+
 .savechanges {
 background-color: #006eb6;
 color: white;
@@ -718,4 +716,9 @@ padding: 10px 15px 10px 15px;
 font-size: 10px;
 width: 30%;
 margin-bottom: 15px;
+}
+
+.savechanges:hover{
+  background-color: #0099ff;
+  cursor: pointer;
 }

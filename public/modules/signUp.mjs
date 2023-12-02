@@ -10,7 +10,12 @@ async function signUp (){
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const username = document.getElementById('username').value
-    const msg = await CreateUser(password, email, username);
-    console.log(msg);
-    window.location.href = '../main/index.html'
-}
+    const msg = await CreateUser(password, email, username).then (() => {
+        console.log(msg);
+        setTimeout(() => {
+            window.location.href = '../main/index.html'
+        }, 1000)
+        
+    });
+    
+  }

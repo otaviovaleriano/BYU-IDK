@@ -9,7 +9,7 @@ import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } f
 
 // Add Firebase products that you want to use
 //import { getAuth } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js'
-import { getFirestore, collection, query, limit, orderBy, setDoc, getDocs, doc} from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js'
+import { getFirestore, collection, query, limit, orderBy, setDoc, getDoc, getDocs, doc, Timestamp, addDoc} from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js'
 
 // TODO: Add SDKs for Firebase products that you want to use
 const firebaseConfig = {
@@ -36,17 +36,19 @@ export async function GetPostInfo(queryAmount) {
     const Ref = collection(db, "Posts");
 
     // Create a query against the collection.
-    const q = query(Ref, orderBy("Date", "desc"), limit(queryAmount));
+    const q = query(Ref, orderBy("Date", "asc"), limit(queryAmount));
 
     const querySnapshot = await getDocs(q);
     await querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
-        postData.push(doc.data());
+        let documentData = doc.data();
+        documentData["docId"] = doc.id
+        postData.push(documentData);
     });
     return postData
 }
 
-export async function SetPostInfo(){
+export async function SetPostInfo() {
 
 }
 
@@ -56,49 +58,100 @@ async function SetNewUser(userId, newUserName) {
     });
 }
 
-export async function CreateUser(password, email, newUserName){
+export async function CreateUser(password, email, newUserName) {
     let errorMessage = "success"
-        if (password.length > 0 && email.length > 0 && newUserName.length > 0)
-        {
-            if (newUserName.length > 10)
-            {
-                errorMessage = "UserName must be less than 11 characters";
-            }
-            else
-            {
-                const auth = getAuth();
-                createUserWithEmailAndPassword(auth, email, password)
+    if (password.length > 0 && email.length > 0 && newUserName.length > 0) {
+        if (newUserName.length > 10) {
+            errorMessage = "UserName must be less than 11 characters";
+        }
+        else {
+            const auth = getAuth();
+            createUserWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
 
-                const user = userCredential.user;
-                localStorage.setItem("userId", user.uid)
-                SetNewUser(user.uid, newUserName);
+                    const user = userCredential.user;
+                    localStorage.setItem("userId", user.uid)
+                    SetNewUser(user.uid, newUserName);
                 })
                 .catch((error) => {
                     errorMessage = error.message;
                 });
-            }
         }
-        else {errorMessage("Please fill Out all Fields")}
-    return(errorMessage)
+    }
+    else { errorMessage("Please fill Out all Fields") }
+    return (errorMessage)
 }
 
-export async function LoginUser(password, email){
+export async function LoginUser(password, email) {
     let errorMessage = "success"
-    if (password.length > 0 && email.length > 0)
-    {
+    if (password.length > 0 && email.length > 0) {
         signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            // Signed in 
-            const user = userCredential.user;            
-           localStorage.setItem("userId", user.uid)
-            // ...
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                localStorage.setItem("userId", user.uid)
+                // ...
 
-        })
-        .catch((error) => {
-            errorMessage = error.message;
-        });
+            })
+            .catch((error) => {
+                errorMessage = error.message;
+            });
     }
-    else {errorMessage = "Please fill Out all Fields"}
+    else { errorMessage = "Please fill Out all Fields" }
     return errorMessage;
+}
+
+export async function GetUserName() {
+    const userId = localStorage.getItem("userId")
+    let UserName = "Login"
+
+    const docRef = doc(db, "Users", `${userId}`);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+        const userData = docSnap.data();
+        UserName = userData.UserName;
+    } else {
+        // docSnap.data() will be undefined in this case
+        console.log("No such document!");
+    }
+    // console.log(UserName)
+    return UserName
+}
+
+
+function formattedString() {
+    const now = new Date(Date.now());
+
+    const options = {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true // Use 12-hour clock format
+    };
+
+    const formattedDateString = new Intl.DateTimeFormat('en-US', options).format(now);
+
+    return formattedDateString
+}
+
+export async function newPost(category, textContent) {
+    const username = await GetUserName();
+    const now = Timestamp.now();
+    let newDate = formattedString();
+    if (username !== "Login") {
+        const PostCollection = collection(db, 'Posts')
+        const NewPostContent = {
+            Category: category,
+            Comments: [""],
+            Date: now,
+            DateString: newDate,
+            PostContent: textContent,
+            PostLikes: 0,
+            UserNamePost: username,
+            UsersLiked: [""]
+        };
+        await addDoc(PostCollection, NewPostContent);
+    }
 }

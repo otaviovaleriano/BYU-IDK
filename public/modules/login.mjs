@@ -9,9 +9,14 @@ async function login (){
     // console.log("Hey Yah!")
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
-    const msg = await LoginUser(password, email);
+    const msg = await LoginUser(password, email).then ( () => {
+        setTimeout(() => {
+            window.location.href = '../main/index.html'
+        }, 1000)
+        
+    });
     console.log(msg);
-    window.location.href = '../main/index.html'
+    // 
 }
 
 

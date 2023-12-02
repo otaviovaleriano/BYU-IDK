@@ -1,14 +1,16 @@
-import { GetPostInfo } from "../modules/firebase.mjs";
+import { GetPostInfo, newPost } from "../modules/firebase.mjs";
+import { setUsername } from "../modules/header.mjs";
+
 
 let PostData;
 let testmode = true;
 
-if (testmode === true)
-{
+if (testmode === true) {
     PostData = await GetPostInfo(20)
 }
 
-function setPostContent(){
+function setPostContent() {
+    console.log(PostData)
     for (let i = 0; i < PostData.length; i++) {
         const Comments = CommentContent(PostData[i].Comments);
         const postContent = `
@@ -19,11 +21,11 @@ function setPostContent(){
                         <div class="Icons">
                         <div class="IconBox">
                             <img src="../images/Comment-white.png" class="iconImg">
-                            <text class="iconNum">${PostData[i].Comments.length}</text>
+                            <text class="iconNum">${PostData[i].Comments.length - 1}</text>
                         </div>
                         <div class="IconBox">
-                            <img src="../images/ThumbsUp-white.png" class="iconImg">
-                            <text class="iconNum">${PostData[i].UsersLiked.length-1}</text>
+                            <img id="${PostData[i].docId}" src="../images/ThumbsUp-white.png" class="iconImg likeButton">
+                            <text class="iconNum">${PostData[i].UsersLiked.length - 1}</text>
                         </div>
                     </div>
                 </div>
@@ -33,26 +35,26 @@ function setPostContent(){
                 </div>
                 <div class="CommentBox">
                     <textarea class="inputBoxMain commentBox"type="text" placeholder="Comment"></textarea>
-                    <button class="btn postBtn ">Post</button>
+                    <button id="${PostData[i].docId}" class="btn postBtn ">Post</button>
                 </div>
             </div>
         `
         document.getElementById('formContent').insertAdjacentHTML("afterbegin", postContent)
-        console.log(PostData[i])
-    } 
+        // console.log(PostData[i])
+    }
 }
 
-function CommentContent(Comments){
+function CommentContent(Comments) {
     let CommentsString = "";
-    console.log(Comments.length)
-    for (let i = 0; i < Comments.length; i++){
+    // console.log(Comments.length)
+    for (let i = 1; i < Comments.length; i++) {
         const Comment = `
         <div class="reply shadow">
             <div class="replyHeader">
                 <text class="PostUserName">${Comments[i].CommentUserName}</text>
                 <div class="IconBox">
                     <img src="../images/ThumbsUp.png" class="iconImg">
-                    <text class="CommenticonNum">${Comments[i].CommentUsersLiked.length-1}</text>
+                    <text class="CommenticonNum">${Comments[i].CommentUsersLiked.length - 1}</text>
                 </div>
             </div>
             <text class="replyContent">${Comments[i].CommentContent}</text>
@@ -63,13 +65,12 @@ function CommentContent(Comments){
     return CommentsString;
 }
 
-function INIT(){
+async function INIT() {
     let expandButton = document.getElementById("PostArrow")
     let postMenu = true;
 
     expandButton.addEventListener("click", () => {
-        if (postMenu == false)
-        {
+        if (postMenu == false) {
             const content = `
                 <textarea placeholder="Ask A Question!" id="PostContentInput"></textarea>
                 <!-- Category Drop Down -->
@@ -86,8 +87,7 @@ function INIT(){
             expandButton.src = "../images/UpArrow.png"
             postMenu = true;
         }
-        else
-        {
+        else {
             document.getElementById("CategoryInput").remove();
             document.getElementById("SubmitButton").remove();
             document.getElementById("PostContentInput").remove();
@@ -97,10 +97,38 @@ function INIT(){
 
     });
 
-    if (testmode === true)
-    {
-        setPostContent()
+    const submitBtn = document.getElementById('SubmitButton');
+    submitBtn.addEventListener("click", () => {
+        makePost();
+    })
+
+    if (testmode === true) {
+        await setPostContent()
+        await setUsername();
+        // Assuming all buttons have a common ancestor with ID "formBox"
+        const formBox = document.getElementById('formBox');
+
+        formBox.addEventListener('click', (event) => {
+
+            if (event.target.classList.contains('likeButton')) {
+                const postId = event.target.id;
+            }
+
+        });
+
+    }
+
+    async function makePost() {
+        let category = document.getElementById('CategoryInput');
+        let categoryValue = category.value;
+        let textContent = document.getElementById('PostContentInput')
+        let textContentValue = textContent.value;
+        await newPost(categoryValue, textContentValue)
+
+        textContent.value = ""
+        PostData = await GetPostInfo(20)
+        await setPostContent();
     }
 }
 
-INIT()
+INIT();

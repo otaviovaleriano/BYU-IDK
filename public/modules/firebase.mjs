@@ -9,7 +9,7 @@ import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } f
 
 // Add Firebase products that you want to use
 //import { getAuth } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js'
-import { getFirestore, collection, query, limit, orderBy, getDoc, getDocs, doc} from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js'
+import { getFirestore, collection, query, limit, orderBy, setDoc, getDocs, doc} from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js'
 
 // TODO: Add SDKs for Firebase products that you want to use
 const firebaseConfig = {
@@ -56,13 +56,13 @@ async function SetNewUser(userId, newUserName) {
     });
 }
 
-export async function CreateUser(email, password, newUserName){
-    let errorMessage = ""
+export async function CreateUser(password, email, newUserName){
+    let errorMessage = "success"
         if (password.length > 0 && email.length > 0 && newUserName.length > 0)
         {
-            if (newUserName.length > 12)
+            if (newUserName.length > 10)
             {
-                errorMessage = "UserName must be less than 13 characters";
+                errorMessage = "UserName must be less than 11 characters";
             }
             else
             {
@@ -71,8 +71,8 @@ export async function CreateUser(email, password, newUserName){
                 .then((userCredential) => {
 
                 const user = userCredential.user;
-                SetNewUser(user.userID, newUserName);
-                errorMessage = "success"
+                localStorage.setItem("userId", user.uid)
+                SetNewUser(user.uid, newUserName);
                 })
                 .catch((error) => {
                     errorMessage = error.message;
@@ -84,15 +84,16 @@ export async function CreateUser(email, password, newUserName){
 }
 
 export async function LoginUser(password, email){
-    let errorMessage = ""
+    let errorMessage = "success"
     if (password.length > 0 && email.length > 0)
     {
         signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             // Signed in 
-            const user = userCredential.user;
-            errorMessage = "success"
+            const user = userCredential.user;            
+           localStorage.setItem("userId", user.uid)
             // ...
+
         })
         .catch((error) => {
             errorMessage = error.message;

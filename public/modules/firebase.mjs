@@ -9,7 +9,7 @@ import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } f
 
 // Add Firebase products that you want to use
 //import { getAuth } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js'
-import { getFirestore, collection, query, limit, orderBy, setDoc, getDoc, getDocs, doc, Timestamp, addDoc} from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js'
+import { getFirestore, collection, query, limit, orderBy, setDoc, updateDoc, getDoc, getDocs, doc, Timestamp, addDoc} from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js'
 
 // TODO: Add SDKs for Firebase products that you want to use
 const firebaseConfig = {
@@ -21,7 +21,6 @@ const firebaseConfig = {
     appId: "1:406518643156:web:39865d8f499914ac54be41",
     measurementId: "G-2JESMELLP9"
 };
-
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -153,5 +152,84 @@ export async function newPost(category, textContent) {
             UsersLiked: [""]
         };
         await addDoc(PostCollection, NewPostContent);
+    }
+}
+
+export async function likePost(docId) {
+    const username = await GetUserName();
+    if (username !== "Login") {
+        const docRef = doc(db, "Posts", docId);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            const docData = docSnap.data();
+            let postLikesAmount = docData.PostLikes;
+            let usersLikedArray = docData.UsersLiked;
+
+            if (!usersLikedArray.includes(username))
+            {
+                usersLikedArray.push(username)
+                await updateDoc(docRef, {
+                    PostLikes: postLikesAmount + 1,
+                    UsersLiked: usersLikedArray
+                });
+            }else{
+                console.log("User Allready Liked");
+            }
+
+        } else {
+            console.log("No such document!");
+        }
+    }
+}
+
+export async function addComment(docId, commentContent) {
+    const username = await GetUserName();
+  
+    if (username !== "Login") {
+      const docRef = doc(db, "Posts", docId);
+      const docSnap = await getDoc(docRef);
+  
+        if (docSnap.exists()) {
+        await updateDoc(docRef, {
+            Comments: firebase.firestore.FieldValue.arrayUnion({
+                CommentContent: commentContent,
+                CommentUserName: username,
+                CommentUsersLiked: [""]
+            })
+        });
+        } else {
+            console.log("No such document!");
+        }
+    }
+}
+
+export async function LikeComment(docId, commentId) {
+    const username = await GetUserName();
+    if (username !== "Login") {
+        const docRef = doc(db, "Posts", docId);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            const docData = docSnap.data();
+            let comments = docData.Comments;
+            let currentComment = comments[commentId]
+            let usersLikedArray = currentComment.CommentUsersLiked;
+
+            if (!usersLikedArray.includes(username))
+            {
+                usersLikedArray.push(username)
+                currentComment.CommentUsersLiked = usersLikedArray
+                comments[commentId] = currentComment;
+                await updateDoc(docRef, {
+                    Comments: comments
+                });
+            }else{
+                console.log("User Allready Liked Comment");
+            }
+
+        } else {
+            console.log("No such document!");
+        }
     }
 }

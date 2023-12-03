@@ -18,11 +18,11 @@ function setPostContent(PostData) {
                     
                         <div class="Icons">
                         <div class="IconBox">
-                            <img src="../images/Comment-white.png" class="iconImg">
+                            <img src="./images/Comment-white.png" class="iconImg">
                             <text class="iconNum">${PostData[i].Comments.length - 1}</text>
                         </div>
                         <div class="IconBox">
-                            <img id="${PostData[i].docId}" src="../images/ThumbsUp-white.png" class="iconImg likeButton">
+                            <img id="${PostData[i].docId}" src="./images/ThumbsUp-white.png" class="iconImg likeButton">
                             <text id="likeNum_${PostData[i].docId}" class="iconNum">${PostData[i].UsersLiked.length - 1}</text>
                         </div>
                     </div>
@@ -52,7 +52,7 @@ function CommentContent(PostData) {
             <div class="replyHeader">
                 <text class="PostUserName">${Comments[i].CommentUserName}</text>
                 <div class="IconBox">
-                    <img commentId="${i}" id="${PostData.docId}" src="../images/ThumbsUp.png" class="iconImg LikeCommentButton">
+                    <img commentId="${i}" id="${PostData.docId}" src="./images/ThumbsUp.png" class="iconImg LikeCommentButton">
                     <text id="CommentlikeNum_${PostData.docId}${i}" class="CommenticonNum">${Comments[i].CommentUsersLiked.length - 1}</text>
                 </div>
             </div>

@@ -11,7 +11,7 @@ async function login (){
     const password = document.getElementById('password').value;
     const msg = await LoginUser(password, email).then ( () => {
         setTimeout(() => {
-            window.location.href = '../main/index.html'
+            window.location.href = '../index.html'
         }, 1000)
         
     });

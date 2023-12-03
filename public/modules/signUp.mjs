@@ -13,7 +13,7 @@ async function signUp (){
     const msg = await CreateUser(password, email, username).then (() => {
         console.log(msg);
         setTimeout(() => {
-            window.location.href = '../main/index.html'
+            window.location.href = '../index.html'
         }, 1000)
         
     });

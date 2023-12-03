@@ -9,7 +9,7 @@ import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } f
 
 // Add Firebase products that you want to use
 //import { getAuth } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js'
-import { getFirestore, collection, query, limit, orderBy, setDoc, updateDoc, getDoc, getDocs, doc, Timestamp, addDoc} from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js'
+import { getFirestore, where, collection, query, limit, orderBy, setDoc, updateDoc, getDoc, getDocs, doc, Timestamp, addDoc} from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js'
 
 // TODO: Add SDKs for Firebase products that you want to use
 const firebaseConfig = {
@@ -29,13 +29,21 @@ const db = getFirestore(app);
 const auth = getAuth();
 
 // Query
-export async function GetPostInfo(queryAmount) {
+export async function GetPostInfo(queryAmount, Category, Type, SearchTerm) {
     var postData = [];
     // Create a reference to the cities collection
     const Ref = collection(db, "Posts");
+    let q;
 
-    // Create a query against the collection.
-    const q = query(Ref, orderBy("Date", "asc"), limit(queryAmount));
+    if (Category === "All")
+    {
+        // Create a query against the collection.
+        q = query(Ref, orderBy(Type, "asc"), limit(queryAmount));
+    }
+    else 
+    {
+        q = query(Ref, where("Category", "==", Category), orderBy(Type, "asc"), limit(queryAmount));
+    }
 
     const querySnapshot = await getDocs(q);
     await querySnapshot.forEach((doc) => {
@@ -44,11 +52,18 @@ export async function GetPostInfo(queryAmount) {
         documentData["docId"] = doc.id
         postData.push(documentData);
     });
-    return postData
-}
 
-export async function SetPostInfo() {
-
+    if (SearchTerm !== "") {
+        const searchTermArray = SearchTerm.toLowerCase().split(" ");
+        
+        const searchedPostData = postData.filter(post => {
+            return searchTermArray.some(word => post.PostContent.toLowerCase().includes(word));
+        });
+    
+        return searchedPostData;
+    } else {
+        return postData;
+    }
 }
 
 async function SetNewUser(userId, newUserName) {
@@ -186,18 +201,22 @@ export async function likePost(docId) {
 export async function addComment(docId, commentContent) {
     const username = await GetUserName();
   
-    if (username !== "Login") {
-      const docRef = doc(db, "Posts", docId);
-      const docSnap = await getDoc(docRef);
+    if (username !== "Login" && commentContent !== "") {
+        const docRef = doc(db, "Posts", docId);
+        const docSnap = await getDoc(docRef);
   
         if (docSnap.exists()) {
-        await updateDoc(docRef, {
-            Comments: firebase.firestore.FieldValue.arrayUnion({
+            const docData = docSnap.data();
+            let comments = docData.Comments;
+            comments.push({
                 CommentContent: commentContent,
                 CommentUserName: username,
                 CommentUsersLiked: [""]
             })
-        });
+
+            await updateDoc(docRef, {
+                Comments: comments
+            });
         } else {
             console.log("No such document!");
         }
@@ -215,7 +234,6 @@ export async function LikeComment(docId, commentId) {
             let comments = docData.Comments;
             let currentComment = comments[commentId]
             let usersLikedArray = currentComment.CommentUsersLiked;
-
             if (!usersLikedArray.includes(username))
             {
                 usersLikedArray.push(username)
@@ -224,6 +242,7 @@ export async function LikeComment(docId, commentId) {
                 await updateDoc(docRef, {
                     Comments: comments
                 });
+                console.log("FIREBASE: ", likesAmount)
             }else{
                 console.log("User Allready Liked Comment");
             }

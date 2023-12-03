@@ -1,23 +1,21 @@
-import { GetPostInfo, newPost } from "../modules/firebase.mjs";
+import { GetPostInfo, newPost, likePost, addComment, LikeComment } from "../modules/firebase.mjs";
 import { setUsername } from "../modules/header.mjs";
 
+let Category = "All";
+let Type = "Date";
+let SearchTerm = ""
 
-let PostData;
-let testmode = true;
-
-if (testmode === true) {
-    PostData = await GetPostInfo(20)
-}
-
-function setPostContent() {
-    console.log(PostData)
+function setPostContent(PostData) {
+    document.getElementById('formContent').innerHTML = "";
     for (let i = 0; i < PostData.length; i++) {
-        const Comments = CommentContent(PostData[i].Comments);
+        const Comments = CommentContent(PostData[i]);
         const postContent = `
         <div class="questionBox shadow">
                 <div class="postHeader">
                     <text class="PostUserName">${PostData[i].UserNamePost}</text>
+                    <text class="PostCategory">${PostData[i].Category}</text>
                     <text class="PostDate">${PostData[i].DateString}</text>
+                    
                         <div class="Icons">
                         <div class="IconBox">
                             <img src="../images/Comment-white.png" class="iconImg">
@@ -25,7 +23,7 @@ function setPostContent() {
                         </div>
                         <div class="IconBox">
                             <img id="${PostData[i].docId}" src="../images/ThumbsUp-white.png" class="iconImg likeButton">
-                            <text class="iconNum">${PostData[i].UsersLiked.length - 1}</text>
+                            <text id="likeNum_${PostData[i].docId}" class="iconNum">${PostData[i].UsersLiked.length - 1}</text>
                         </div>
                     </div>
                 </div>
@@ -34,8 +32,8 @@ function setPostContent() {
                 ${Comments}
                 </div>
                 <div class="CommentBox">
-                    <textarea class="inputBoxMain commentBox"type="text" placeholder="Comment"></textarea>
-                    <button id="${PostData[i].docId}" class="btn postBtn ">Post</button>
+                    <textarea class="inputBoxMain commentBox"type="text" id="commentBox_${PostData[i].docId}" placeholder="Comment"></textarea>
+                    <button id="${PostData[i].docId}" class="btn postBtn commentBtn">Post</button>
                 </div>
             </div>
         `
@@ -44,8 +42,9 @@ function setPostContent() {
     }
 }
 
-function CommentContent(Comments) {
+function CommentContent(PostData) {
     let CommentsString = "";
+    let Comments = PostData.Comments
     // console.log(Comments.length)
     for (let i = 1; i < Comments.length; i++) {
         const Comment = `
@@ -53,8 +52,8 @@ function CommentContent(Comments) {
             <div class="replyHeader">
                 <text class="PostUserName">${Comments[i].CommentUserName}</text>
                 <div class="IconBox">
-                    <img src="../images/ThumbsUp.png" class="iconImg">
-                    <text class="CommenticonNum">${Comments[i].CommentUsersLiked.length - 1}</text>
+                    <img commentId="${i}" id="${PostData.docId}" src="../images/ThumbsUp.png" class="iconImg LikeCommentButton">
+                    <text id="CommentlikeNum_${PostData.docId}${i}" class="CommenticonNum">${Comments[i].CommentUsersLiked.length - 1}</text>
                 </div>
             </div>
             <text class="replyContent">${Comments[i].CommentContent}</text>
@@ -65,9 +64,103 @@ function CommentContent(Comments) {
     return CommentsString;
 }
 
+
+async function commentOnPost(postId){
+    const username = localStorage.getItem('userId')
+    if (username) {
+        const commentElement = document.getElementById("commentBox_" + postId);
+        const commentContent = commentElement.value;
+        await addComment(postId, commentContent)
+        commentElement.value = ""
+        setTimeout(()=>{
+            reloadContent()
+        },1000)
+    }
+    else {
+        //replace this with a better pop-up
+        alert("Login pls, Mate")
+    }
+}
+
+async function likePostEvent(postId) {
+    const username = localStorage.getItem('userId')
+    if (username) {
+        await likePost(postId)
+        reloadContent()
+    }
+    else {
+        //replace this with a better pop-up
+        alert("Login pls, Mate")
+    }
+}
+
+async function likeCommentEvent(postId, commentId) {
+    const username = localStorage.getItem('userId')
+    if (username) {
+        await LikeComment(postId, commentId)
+        reloadContent()
+        
+    }
+    else {
+        //replace this with a better pop-up
+        alert("Login pls, Mate")
+    }
+}
+
+async function reloadContent() {
+    let PostData = await GetPostInfo(20, Category, Type, SearchTerm)
+    await setPostContent(PostData);
+    await setUsername();
+}
+
+// async function reloadCategoryContent()
+
+async function makePost() {
+    let category = document.getElementById('CategoryInput');
+    let categoryValue = category.value;
+    let textContent = document.getElementById('PostContentInput')
+    let textContentValue = textContent.value;
+    await newPost(categoryValue, textContentValue)
+
+    textContent.value = ""
+    reloadContent();
+}
+
 async function INIT() {
     let expandButton = document.getElementById("PostArrow")
     let postMenu = true;
+
+    const submitBtn = document.getElementById('SubmitButton');
+    submitBtn.addEventListener("click", () => {
+        makePost();
+    })
+
+    const formBox = document.getElementById('formBox');
+
+    const SearchCateogry = document.getElementById('SearchCategoryInput');
+    const SearchButton = document.getElementById('SearchButton');
+    const SearchInput = document.getElementById('searchInputBox');
+
+    SearchCateogry.addEventListener("change", () => {
+        Category = SearchCateogry.value;
+        reloadContent()
+    })
+
+    SearchButton.addEventListener("click", () => {
+        SearchTerm = SearchInput.value;
+        if (SearchTerm != "")
+        {
+            reloadContent()
+        }
+    })
+
+    SearchInput.addEventListener("change", () => {
+        SearchTerm = SearchInput.value;
+        if (SearchTerm === "")
+        {
+            reloadContent()
+        }
+    })
 
     expandButton.addEventListener("click", () => {
         if (postMenu == false) {
@@ -97,38 +190,27 @@ async function INIT() {
 
     });
 
-    const submitBtn = document.getElementById('SubmitButton');
-    submitBtn.addEventListener("click", () => {
-        makePost();
-    })
+    formBox.addEventListener('click', (event) => {
 
-    if (testmode === true) {
-        await setPostContent()
-        await setUsername();
-        // Assuming all buttons have a common ancestor with ID "formBox"
-        const formBox = document.getElementById('formBox');
+        if (event.target.classList.contains('likeButton')) {
+            const postId = event.target.id;
+            likePostEvent(postId);
+        }
 
-        formBox.addEventListener('click', (event) => {
+        if (event.target.classList.contains('commentBtn')) {
+            const postId = event.target.id;
+            commentOnPost(postId);
+        }
 
-            if (event.target.classList.contains('likeButton')) {
-                const postId = event.target.id;
-            }
+        if (event.target.classList.contains('LikeCommentButton')) {
+            const postId = event.target.id;
+            let commentId = event.target.getAttribute("commentId")
+            likeCommentEvent(postId, commentId);
+        }
 
-        });
+    });
 
-    }
-
-    async function makePost() {
-        let category = document.getElementById('CategoryInput');
-        let categoryValue = category.value;
-        let textContent = document.getElementById('PostContentInput')
-        let textContentValue = textContent.value;
-        await newPost(categoryValue, textContentValue)
-
-        textContent.value = ""
-        PostData = await GetPostInfo(20)
-        await setPostContent();
-    }
+    reloadContent()
 }
 
 INIT();

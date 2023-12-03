@@ -234,6 +234,16 @@ hr {
     font-size: 20px;
 }
 
+#SearchCategoryInput {
+  grid-column: 1/2;
+  margin: 20px;
+  border-radius: 20px;
+  text-align: center;
+  background-color: white;
+  color: black;
+  font-size: 20px;
+}
+
 #PostArrow {
     grid-row: 2/3;
     grid-column: 2/3;
@@ -347,7 +357,7 @@ hr {
 .postHeader {
     width: 100%;
     display: grid;
-    grid-template-columns: 200px auto 200px;
+    grid-template-columns: 200px auto 200px 200px;
     padding-top: 8px;
     height: 55px;
     background-color: #4F9ACF;
@@ -375,6 +385,13 @@ hr {
     padding-top: 15px;
     font-size: 16px;
     text-align: left;
+}
+
+.PostCategory {
+  padding-top: 15px;
+  font-size: 16px;
+  text-align: left;
+  padding-left: 20px;
 }
 
 .Icons {

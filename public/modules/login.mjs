@@ -1,4 +1,4 @@
-import { LoginUser } from '../modules/firebase.mjs';
+import { LoginUser } from './firebase01.mjs';
 
 addEventListener("load", () => {
     const loginBtn = document.getElementById('loginBtn');

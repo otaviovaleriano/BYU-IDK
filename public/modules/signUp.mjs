@@ -1,4 +1,4 @@
-import { CreateUser } from '../modules/firebase.mjs';
+import { CreateUser } from './firebase01.mjs';
 
 addEventListener("load", () => {
     const signUpBtn = document.getElementById('signUpBtn');
@@ -10,8 +10,7 @@ async function signUp (){
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const username = document.getElementById('username').value
-    const msg = await CreateUser(password, email, username).then (() => {
-        console.log(msg);
+    await CreateUser(password, email, username).then (() => {
         setTimeout(() => {
             window.location.href = '../index.html'
         }, 1000)

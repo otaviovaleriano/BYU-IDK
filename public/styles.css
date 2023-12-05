@@ -2,7 +2,7 @@
 
 body {
   font-family: "Gothic A1", sans-serif;
- }
+}
 
 .inputBoxMain {
   border-radius: 50px;
@@ -92,9 +92,10 @@ header {
   grid-column: 2/6;
   text-align: center;
   font-size: 1.5em;
-  }
+}
 
-#title h1, a {
+#title h1,
+a {
   letter-spacing: 3px;
   font-family: "Gothic A1", sans-serif;
   text-decoration: none;
@@ -738,7 +739,7 @@ hr {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); 
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .modal-content {
@@ -751,7 +752,7 @@ hr {
 }
 
 /* Tablet view */
-@media only screen and (min-width: 601px) and (max-width: 1024px) {
+@media only screen and (min-width: 701px) and (max-width: 1024px) {
   #MainHeader {
     padding: 3px;
     border-radius: 20px;
@@ -826,7 +827,7 @@ hr {
 }
 
 /* Mobile view */
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 800px) {
   body {
     margin: 0px;
   }
@@ -834,6 +835,11 @@ hr {
   #MainHeader {
     padding: 5px;
     margin-bottom: 30px;
+    border-radius: 0px;
+  }
+
+  #MainFooter {
+    padding: 5px;
     border-radius: 0px;
   }
 
@@ -868,7 +874,7 @@ hr {
   #searchBox {
     width: 100%;
     grid-column: 1/3;
-    height: 220px;
+    height: 170px;
     margin-bottom: 200px;
     grid-template-columns: 40% 20% 40%;
     grid-template-rows: auto 80px;
@@ -877,7 +883,7 @@ hr {
   #searchInputBox {
     grid-column: 1/4;
     margin: auto;
-    margin-top: 20px;
+    margin-top: 18px;
     margin-bottom: 0px;
     padding: 20px;
     font-size: 15px;
@@ -908,7 +914,10 @@ hr {
     grid-column: 2/4;
   }
 
-  #formBox,
+  #formBox {
+    width: 100%;
+    margin-top: 0px;
+  }
   #PostContent,
   #categoriesMenu {
     width: 100%;
@@ -922,7 +931,7 @@ hr {
   }
 
   #PostContent {
-    margin-top: 130px;
+    margin-top: 70px;
   }
 
   #PostContentInput {
@@ -979,8 +988,7 @@ hr {
     align-items: flex-end;
     padding-top: 15px;
     font-size: 12px;
-    text-align: right;
-    padding-right: 20px;
+    padding-left: 30px;
   }
 
   .Icons {
@@ -1000,6 +1008,7 @@ hr {
   .iconNum {
     padding-top: 12px;
     font-size: 15px;
+    width: 20px;
   }
 
   .replyHeader {

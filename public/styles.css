@@ -766,10 +766,23 @@ footer {
   body {
     margin: 0px;
   }
+
+  #MainHeader {
+    padding: 5px;
+    margin-bottom: 30px;
+    border-radius: 0px;
+  }
+
+  #title {
+    text-align: center;
+    font-size: 15px;
+  }
+
   .login-container {
     width: 90%;
     display: block;
   }
+
   .signup-container {
     width: 90%;
   }

@@ -1,5 +1,5 @@
 import { GetPostInfo, newPost, likePost, addComment, LikeComment } from "./firebase01.mjs";
-import { setUsername } from "./header.mjs";
+import { setUsername, AddHeader} from "./header.mjs";
 
 let Category = "All";
 let Type = "Date";
@@ -127,6 +127,7 @@ async function makePost() {
 }
 
 async function INIT() {
+    AddHeader()
     let expandButton = document.getElementById("PostArrow")
     let postMenu = true;
 
@@ -194,6 +195,7 @@ async function INIT() {
 
         if (event.target.classList.contains('likeButton')) {
             const postId = event.target.id;
+            console.log(postId)
             likePostEvent(postId);
         }
 
@@ -205,6 +207,7 @@ async function INIT() {
         if (event.target.classList.contains('LikeCommentButton')) {
             const postId = event.target.id;
             let commentId = event.target.getAttribute("commentId")
+            console.log(postId)
             likeCommentEvent(postId, commentId);
         }
 

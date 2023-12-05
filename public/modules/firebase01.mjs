@@ -251,3 +251,21 @@ export async function LikeComment(docId, commentId) {
         }
     }
 }
+
+export async function UpdateUsername(NewUserName) {
+    const username = await GetUserName();
+    if (username !== "Login") {
+        const userId = localStorage.getItem("userId")
+        const docRef = doc(db, "Users", userId);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+
+            await updateDoc(docRef, {
+                UserName: NewUserName
+            });
+        } else {
+            console.log("No such document!");
+        }
+    }
+}

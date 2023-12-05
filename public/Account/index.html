@@ -5,49 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account Page</title>
     <link rel="stylesheet" href="../styles.css">
+    <script src="../modules/account.mjs" type="module"></script>
 </head>
 <body>
-  <header>
-    <div id="title"><a href="../main/index.html"><h1>BYU-I Don't Know</h1></a>
-    </div>
-    <div id="icon">
-        <a href="../Login/index.html">
-        <img src="../images/icon-white.svg" alt="Login Icon - Access Acount"></a>
-    </div>
-    </header>
+  <header id="MainHeader"></header>
       <div class="account-container">
       <h2 class="accountTitle">Account</h2>
       <img src="../images/icon-white.svg" width="150" alt="">
-      <form action="#" method="post">
+      <h5 id="accountUserName"></h5>
         <input
           class="inputBox username"
-          type="username"
           id="username"
-          name="username"
-          placeholder="Username"
-          required
+          placeholder="New Username"
         />
-        <input
-          class="inputBox email"
-          type="email"
-          id="email"
-          name="email"
-          placeholder="Email"
-          required
-        />
-
-        <input
-          class="inputBox password"
-          type="password"
-          id="password"
-          name="password"
-          placeholder="Password"
-          required
-        />
-
         <button class="btn deleteaccount" type="submit">Delete Account</button>
-        <button class="btn savechanges" type="submit">Save Changes</button>
-      </form>
+        <button class="btn savechanges" id="saveChangesButton" type="submit">Save Changes</button>
       <hr />
     </div> 
     <footer>

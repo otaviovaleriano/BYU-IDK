@@ -1,30 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account Page</title>
     <link rel="stylesheet" href="../styles.css">
     <script src="../modules/account.mjs" type="module"></script>
-</head>
-<body>
-  <header id="MainHeader"></header>
-      <div class="account-container">
+  </head>
+  <body>
+    <header id="MainHeader"></header>
+    <div class="account-container">
       <h2 class="accountTitle">Account</h2>
-      <img src="../images/icon-white.svg" width="150" alt="">
+      <img src="../images/icon-white.svg" width="150" alt>
       <h5 id="accountUserName"></h5>
-        <input
-          class="inputBox username"
-          id="username"
-          placeholder="New Username"
-        />
-        <button class="btn deleteaccount" type="submit">Delete Account</button>
-        <button class="btn savechanges" id="saveChangesButton" type="submit">Save Changes</button>
+      <input
+        class="inputBox username"
+        id="username"
+        placeholder="New Username" />
+      <button class="btn deleteaccount" id="deleteAccountButton" type="submit">Delete
+        Account</button>
+      <button class="btn savechanges" id="saveChangesButton" type="submit">Save
+        Changes</button>
       <hr />
-    </div> 
-    <footer>
-      <span>Final Project BYU-I Don't Know Website.</span>
-      <span>@BYU-I 2023</span>
-  </footer>
-</body>
+      <button class="btn logout" id="logoutBtn" type="submit">Logout</button>
+      <!-- Confirm Modal -->
+      <div id="confirmModal" class="modal">
+        <div class="modal-content">
+          <p>Are you sure you want to delete your account?</p>
+          <button class="btn deleteaccount" id="confirmDelete" >Yes, Delete</button>
+          <button class="btn savechanges" id="closeModal">No, Cancel</button>
+        </div>
+      </div>
+    </div>
+    <footer id="MainFooter">
+      </footer>
+  </body>
 </html>

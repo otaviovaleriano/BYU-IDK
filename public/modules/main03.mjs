@@ -1,5 +1,6 @@
 import { GetPostInfo, newPost, likePost, addComment, LikeComment } from "./firebase01.mjs";
 import { setUsername, AddHeader} from "./header.mjs";
+import { AddFooter } from "../modules/footer.mjs";
 
 let Category = "All";
 let Type = "Date";
@@ -78,7 +79,7 @@ async function commentOnPost(postId){
     }
     else {
         //replace this with a better pop-up
-        alert("Login pls, Mate")
+        alert("Please, Login first.")
     }
 }
 
@@ -90,7 +91,7 @@ async function likePostEvent(postId) {
     }
     else {
         //replace this with a better pop-up
-        alert("Login pls, Mate")
+        alert("Please, Login first.")
     }
 }
 
@@ -103,7 +104,7 @@ async function likeCommentEvent(postId, commentId) {
     }
     else {
         //replace this with a better pop-up
-        alert("Login pls, Mate")
+        alert("Please, Login first.")
     }
 }
 
@@ -128,6 +129,7 @@ async function makePost() {
 
 async function INIT() {
     AddHeader()
+    AddFooter()
     let expandButton = document.getElementById("PostArrow")
     let postMenu = true;
 

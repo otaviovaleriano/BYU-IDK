@@ -79,7 +79,7 @@ async function commentOnPost(postId){
     }
     else {
         //replace this with a better pop-up
-        alert("Login pls, Mate")
+        alert("Please, Login first.")
     }
 }
 
@@ -91,7 +91,7 @@ async function likePostEvent(postId) {
     }
     else {
         //replace this with a better pop-up
-        alert("Login pls, Mate")
+        alert("Please, Login first.")
     }
 }
 
@@ -104,7 +104,7 @@ async function likeCommentEvent(postId, commentId) {
     }
     else {
         //replace this with a better pop-up
-        alert("Login pls, Mate")
+        alert("Please, Login first.")
     }
 }
 

@@ -165,6 +165,8 @@ export async function newPost(category, textContent) {
             UsersLiked: [""]
         };
         await addDoc(PostCollection, NewPostContent);
+    } else {
+        alert("Please, Login first.")
     }
 }
 
@@ -285,16 +287,11 @@ export async function DeleteUser() {
 }
 
 export function Logout() {
-
     // window.location.href = '../index.html'
-    const auth = getAuth();
     signOut(auth).then(() => {
         console.log("Sign-out successful.")
-        console.log("logout firebase")
-        const userId = localStorage.getItem("userId");
-        localStorage.setItem(userId, " ")
-        console.log(userId)
-        // window.location.href = '../index.html'
+        localStorage.removeItem("userId")
+        window.location.href = '../index.html'
     }).catch((error) => {
         console.log(error);
     });

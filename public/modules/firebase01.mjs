@@ -5,11 +5,11 @@ import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.5.2/firebas
 import { getAnalytics } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-analytics.js'
 
 // If you enabled Analytics in your project, add the Firebase SDK for Google Analytics
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js'
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, deleteUser } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js'
 
 // Add Firebase products that you want to use
 //import { getAuth } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js'
-import { getFirestore, where, collection, query, limit, orderBy, setDoc, updateDoc, getDoc, getDocs, doc, Timestamp, addDoc} from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js'
+import { getFirestore, where, collection, query, limit, orderBy, setDoc, updateDoc, getDoc, getDocs, doc, Timestamp, addDoc, deleteDoc } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js'
 
 // TODO: Add SDKs for Firebase products that you want to use
 const firebaseConfig = {
@@ -267,5 +267,23 @@ export async function UpdateUsername(NewUserName) {
         } else {
             console.log("No such document!");
         }
+    }
+}
+
+export async function DeleteUser() {
+    const userId = localStorage.getItem("userId");
+
+    try {       
+        await deleteUser(auth.currentUser);
+
+        const userDocRef = doc(db, "Users", userId);
+        await deleteDoc(userDocRef);
+
+        localStorage.removeItem("userId");
+
+        return "success";
+    } catch (error) {
+        console.error("Error deleting user:", error.message);
+        return error.message;
     }
 }

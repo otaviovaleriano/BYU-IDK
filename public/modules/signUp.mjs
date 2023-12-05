@@ -1,8 +1,10 @@
 import { CreateUser } from './firebase01.mjs';
 import { setUsername, AddHeader} from "./header.mjs";
+import { AddFooter } from "../modules/footer.mjs";
 
 addEventListener("load", () => {
     AddHeader()
+    AddFooter()
     setUsername() 
     const signUpBtn = document.getElementById('signUpBtn');
     signUpBtn.addEventListener("click", signUp);

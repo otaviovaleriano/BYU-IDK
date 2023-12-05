@@ -2,7 +2,8 @@
 
 body {
   font-family: "Gothic A1", sans-serif;
-}
+ }
+
 .inputBoxMain {
   border-radius: 50px;
   border: 0px;
@@ -143,11 +144,11 @@ footer {
   font-family: "Gothic A1", sans-serif;
   font-size: 15px;
   /* margin-top: 10px; */
-  margin-top: auto;
+  margin-top: 30px;
   padding: 20px;
   background-color: #4f9acf;
   border-radius: 20px;
-  min-height: 50px;
+  min-height: 20px;
   color: #ffffff;
 }
 
@@ -690,6 +691,15 @@ hr {
   padding-top: 10px;
   margin: 0px;
   padding: 10px;
+}
+
+.logout {
+  background-color: #006eb6;
+  color: white;
+  padding: 10px 15px 10px 15px;
+  font-size: 15px;
+  width: 25%;
+  margin-bottom: 15px;
 }
 
 .deleteaccount {

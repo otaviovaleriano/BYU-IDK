@@ -1,4 +1,4 @@
-import { UpdateUsername, GetUserName, DeleteUser } from "../modules/firebase01.mjs"
+import { UpdateUsername, GetUserName, DeleteUser, Logout } from "../modules/firebase01.mjs"
 import { setUsername, AddHeader } from "../modules/header.mjs";
 import { AddFooter } from "../modules/footer.mjs";
 
@@ -24,6 +24,12 @@ addEventListener("load", () => {
     const endModal = document.getElementById('closeModal');
     endModal.addEventListener("click", () => {
         closeModal();
+    })
+
+    const logout = document.getElementById('logoutBtn');
+    logout.addEventListener("click", () => {
+        console.log("logouting.")
+        Logout();
     })
 })
 
@@ -66,4 +72,3 @@ function confirmDelete(){
         }
     })
 }
-

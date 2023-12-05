@@ -1,5 +1,5 @@
 import { LoginUser } from './firebase01.mjs';
-import { setUsername, AddHeader} from "./header.mjs";
+import { setUsername, AddHeader} from "../modules/header01.mjs";
 import { AddFooter } from "../modules/footer.mjs";
 
 addEventListener("load", () => {

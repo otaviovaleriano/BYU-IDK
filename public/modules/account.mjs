@@ -1,5 +1,5 @@
 import { UpdateUsername, GetUserName, DeleteUser, Logout } from "../modules/firebase01.mjs"
-import { setUsername, AddHeader } from "../modules/header.mjs";
+import { setUsername, AddHeader } from "../modules/header01.mjs";
 import { AddFooter } from "../modules/footer.mjs";
 
 

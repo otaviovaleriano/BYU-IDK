@@ -1,4 +1,4 @@
-import { GetUserName } from "./firebase01.mjs";
+import { GetUserName } from "./firebase02.mjs";
 
 
 export async function setUsername() {

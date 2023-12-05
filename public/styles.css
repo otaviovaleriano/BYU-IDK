@@ -134,6 +134,7 @@ body {
   border-radius: 50px;
   border: 0px;
   padding-left: 20px;
+  padding: 10px 35px;
   color: rgb(53, 53, 53);
   font-size: 20px;
 }
@@ -760,6 +761,80 @@ footer {
 }
 
 /* Tablet view */
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+  #MainHeader {
+    padding: 10px;
+    margin-bottom: 40px;
+    border-radius: 20px;
+  }
+
+  .inputBox {
+    padding: 8px 35px;
+  }
+
+  #title {
+    font-size: 20px;
+  }
+
+  .login-container,
+  .signup-container,
+  .account-container {
+    width: 80%;
+    display: block;
+  }
+
+  #searchInputBox {
+    font-size: 18px;
+    border-radius: 30px;
+    min-width: 70%;
+    max-height: 400px;
+  }
+
+  #SearchCategoryInput {
+    font-size: 25px;
+  }
+
+  #SearchButton {
+    grid-column: 3;
+  }
+
+  #PostContentInput {
+    min-width: 70%;
+    max-height: 400px;
+  }
+
+  .PostDate,
+  .PostCategory {
+    font-size: 15px;
+    padding-right: 30px;
+  }
+
+  .Icons {
+    grid-column: 4;
+  }
+
+  .iconImg {
+    width: 30px;
+  }
+
+  .iconNum {
+    padding-top: 15px;
+    font-size: 18px;
+  }
+
+  .CommentBox {
+    font-size: 18px;
+  }
+
+  .commentBox {
+    margin-left: 20px;
+  }
+
+  .commentBtn {
+    padding: 10px 40px;
+    margin-bottom: 20px;
+  }
+}
 
 /* Mobile view */
 @media only screen and (max-width: 600px) {

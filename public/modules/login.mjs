@@ -1,9 +1,11 @@
 import { LoginUser } from './firebase01.mjs';
 import { setUsername, AddHeader} from "./header.mjs";
+import { AddFooter } from "../modules/footer.mjs";
 
 addEventListener("load", () => {
     AddHeader()
     setUsername() 
+    AddFooter()
     const loginBtn = document.getElementById('loginBtn');
     loginBtn.addEventListener("click", login);
 })

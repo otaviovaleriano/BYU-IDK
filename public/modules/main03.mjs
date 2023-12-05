@@ -1,5 +1,6 @@
 import { GetPostInfo, newPost, likePost, addComment, LikeComment } from "./firebase01.mjs";
 import { setUsername, AddHeader} from "./header.mjs";
+import { AddFooter } from "../modules/footer.mjs";
 
 let Category = "All";
 let Type = "Date";
@@ -128,6 +129,7 @@ async function makePost() {
 
 async function INIT() {
     AddHeader()
+    AddFooter()
     let expandButton = document.getElementById("PostArrow")
     let postMenu = true;
 

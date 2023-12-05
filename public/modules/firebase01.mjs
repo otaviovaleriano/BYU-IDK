@@ -5,11 +5,11 @@ import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.5.2/firebas
 import { getAnalytics } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-analytics.js'
 
 // If you enabled Analytics in your project, add the Firebase SDK for Google Analytics
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js'
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, deleteUser, signOut } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js'
 
 // Add Firebase products that you want to use
 //import { getAuth } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js'
-import { getFirestore, where, collection, query, limit, orderBy, setDoc, updateDoc, getDoc, getDocs, doc, Timestamp, addDoc} from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js'
+import { getFirestore, where, collection, query, limit, orderBy, setDoc, updateDoc, getDoc, getDocs, doc, Timestamp, addDoc, deleteDoc } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js'
 
 // TODO: Add SDKs for Firebase products that you want to use
 const firebaseConfig = {
@@ -35,13 +35,11 @@ export async function GetPostInfo(queryAmount, Category, Type, SearchTerm) {
     const Ref = collection(db, "Posts");
     let q;
 
-    if (Category === "All")
-    {
+    if (Category === "All") {
         // Create a query against the collection.
         q = query(Ref, orderBy(Type, "asc"), limit(queryAmount));
     }
-    else 
-    {
+    else {
         q = query(Ref, where("Category", "==", Category), orderBy(Type, "asc"), limit(queryAmount));
     }
 
@@ -55,11 +53,11 @@ export async function GetPostInfo(queryAmount, Category, Type, SearchTerm) {
 
     if (SearchTerm !== "") {
         const searchTermArray = SearchTerm.toLowerCase().split(" ");
-        
+
         const searchedPostData = postData.filter(post => {
             return searchTermArray.some(word => post.PostContent.toLowerCase().includes(word));
         });
-    
+
         return searchedPostData;
     } else {
         return postData;
@@ -181,14 +179,13 @@ export async function likePost(docId) {
             let postLikesAmount = docData.PostLikes;
             let usersLikedArray = docData.UsersLiked;
 
-            if (!usersLikedArray.includes(username))
-            {
+            if (!usersLikedArray.includes(username)) {
                 usersLikedArray.push(username)
                 await updateDoc(docRef, {
                     PostLikes: postLikesAmount + 1,
                     UsersLiked: usersLikedArray
                 });
-            }else{
+            } else {
                 console.log("User Allready Liked");
             }
 
@@ -200,11 +197,11 @@ export async function likePost(docId) {
 
 export async function addComment(docId, commentContent) {
     const username = await GetUserName();
-  
+
     if (username !== "Login" && commentContent !== "") {
         const docRef = doc(db, "Posts", docId);
         const docSnap = await getDoc(docRef);
-  
+
         if (docSnap.exists()) {
             const docData = docSnap.data();
             let comments = docData.Comments;
@@ -234,15 +231,14 @@ export async function LikeComment(docId, commentId) {
             let comments = docData.Comments;
             let currentComment = comments[commentId]
             let usersLikedArray = currentComment.CommentUsersLiked;
-            if (!usersLikedArray.includes(username))
-            {
+            if (!usersLikedArray.includes(username)) {
                 usersLikedArray.push(username)
                 currentComment.CommentUsersLiked = usersLikedArray
                 comments[commentId] = currentComment;
                 await updateDoc(docRef, {
                     Comments: comments
                 });
-            }else{
+            } else {
                 console.log("User Allready Liked Comment");
             }
 
@@ -269,3 +265,38 @@ export async function UpdateUsername(NewUserName) {
         }
     }
 }
+
+export async function DeleteUser() {
+    const userId = localStorage.getItem("userId");
+
+    try {
+        await deleteUser(auth.currentUser);
+
+        const userDocRef = doc(db, "Users", userId);
+        await deleteDoc(userDocRef);
+
+        localStorage.removeItem("userId");
+
+        return "success";
+    } catch (error) {
+        console.error("Error deleting user:", error.message);
+        return error.message;
+    }
+}
+
+export function Logout() {
+
+    // window.location.href = '../index.html'
+    const auth = getAuth();
+    signOut(auth).then(() => {
+        console.log("Sign-out successful.")
+        console.log("logout firebase")
+        const userId = localStorage.getItem("userId");
+        localStorage.setItem(userId, " ")
+        console.log(userId)
+        // window.location.href = '../index.html'
+    }).catch((error) => {
+        console.log(error);
+    });
+}
+

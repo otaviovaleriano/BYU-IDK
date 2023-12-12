@@ -1,6 +1,6 @@
-import { UpdateUsername, GetUserName, DeleteUser, Logout } from "./firebase02.mjs"
-import { setUsername, AddHeader } from "./header02.mjs";
-import { AddFooter } from "./footer01.mjs";
+import { UpdateUsername, GetUserName, DeleteUser, Logout } from "./firebase04.mjs"
+import { setUsername, AddHeader } from "./header04.mjs";
+import { AddFooter } from "./footer03.mjs";
 
 
 addEventListener("load", () => {

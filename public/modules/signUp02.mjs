@@ -1,6 +1,6 @@
-import { CreateUser } from './firebase01.mjs';
-import { setUsername, AddHeader} from "../modules/header01.mjs";
-import { AddFooter } from "../modules/footer.mjs";
+import { CreateUser } from './firebase04.mjs';
+import { setUsername, AddHeader} from "./header04.mjs";
+import { AddFooter } from "./footer03.mjs";
 
 addEventListener("load", () => {
     AddHeader()

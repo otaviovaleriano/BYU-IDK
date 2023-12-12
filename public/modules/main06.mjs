@@ -1,6 +1,6 @@
-import { GetPostInfo, newPost, likePost, addComment, LikeComment } from "./firebase02.mjs";
-import { setUsername, AddHeader} from "./header02.mjs";
-import { AddFooter } from "./footer01.mjs";
+import { GetPostInfo, newPost, likePost, addComment, LikeComment } from "./firebase04.mjs";
+import { setUsername, AddHeader} from "./header04.mjs";
+import { AddFooter } from "./footer03.mjs";
 
 let Category = "All";
 let Type = "Date";
